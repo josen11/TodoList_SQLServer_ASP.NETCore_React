@@ -1,6 +1,16 @@
+using APIExample.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// ConnectionString
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Add DB Context Service - Using Entity Framework and TodoContext.cs
+builder.Services.AddDbContext<TodoContext>(opt =>
+  opt.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
